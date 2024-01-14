@@ -18,6 +18,7 @@
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link.active {
+  cursor: pointer;
   color: var(--primary) !important;
 }
 

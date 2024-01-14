@@ -1,7 +1,10 @@
 import React from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ namePage, title }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       {/* Top bar Start */}
@@ -82,23 +85,35 @@ const Header = ({ namePage, title }) => {
             <span class='fa fa-bars'></span>
           </button>
           <div class='collapse navbar-collapse' id='navbarCollapse'>
-            <div class='navbar-nav ms-auto py-0'>
-              <a href='index.html' class='nav-item nav-link active'>
+            <ul class='navbar-nav ms-auto py-0'>
+              <li
+                onClick={() => navigate('/')}
+                class='nav-item nav-link active'
+              >
                 Home
-              </a>
-              <a href='about.html' class='nav-item nav-link'>
+              </li>
+              <li onClick={() => navigate('/about')} class='nav-item nav-link'>
                 About
-              </a>
-              <a href='service.html' class='nav-item nav-link'>
+              </li>
+              <li
+                onClick={() => navigate('/services')}
+                class='nav-item nav-link'
+              >
                 Services
-              </a>
-              <a href='package.html' class='nav-item nav-link'>
+              </li>
+              <li
+                onClick={() => navigate('/packages')}
+                class='nav-item nav-link'
+              >
                 Packages
-              </a>
-              <a href='contact.html' class='nav-item nav-link'>
+              </li>
+              <li
+                onClick={() => navigate('/contact')}
+                class='nav-item nav-link'
+              >
                 Contact
-              </a>
-            </div>
+              </li>
+            </ul>
           </div>
         </nav>
 
