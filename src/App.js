@@ -8,6 +8,7 @@ import Contact from './pages/contact/Contact';
 import DetailTour from './pages/details/DetailTour';
 import HomePage from './pages/homePage/HomePage';
 import ToursTravel from './pages/toursTravel/ToursTravel';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
