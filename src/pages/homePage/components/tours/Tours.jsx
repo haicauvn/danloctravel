@@ -1,7 +1,10 @@
 import React from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 const Tours = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Package Start */}
@@ -49,13 +52,13 @@ const Tours = () => {
                     >
                       Read More
                     </a>
-                    <a
-                      href='#'
+                    <div
                       class='btn btn-sm btn-primary px-3'
                       style={{ borderRadius: '0 30px 30px 0' }}
+                      onClick={() => navigate(`/tours-travel/${1}`)}
                     >
                       Book Now
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>

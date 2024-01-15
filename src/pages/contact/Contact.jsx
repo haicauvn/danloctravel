@@ -61,7 +61,7 @@ const Contact = () => {
             <div class='col-lg-4 col-md-6 wow fadeInUp' data-wow-delay='0.3s'>
               <iframe
                 src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7668.302661731545!2d108.163002!3d16.057635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421922df71fcc3%3A0x7eedbd9e991bfc76!2zQ8O0bmcgVHkgVE5ISCBE4buLY2ggVuG7pSBWw6AgRHUgTOG7i2NoIEThuqduIEzhu5lj!5e0!3m2!1svi!2sus!4v1705308228253!5m2!1svi!2sus'
-                width='400'
+                width='350'
                 height='350'
                 style={{ minWidth: '300px', border: '0' }}
                 allowfullscreen=''

@@ -7,36 +7,42 @@ import {
 } from 'react-router-dom';
 import './style.css';
 
-const Header = ({ namePage, title }) => {
+const Header = () => {
   const navbarData = [
     {
       id: 1,
-      title: 'Home',
+      title: 'Trang chủ',
       text: 'Enjoy Your Vacation With Us',
       linkTo: '/',
     },
     {
       id: 2,
-      title: 'About',
-      text: 'About Us',
+      title: 'Về chúng tôi',
+      text: 'Về chúng tôi',
       linkTo: '/about',
     },
     {
       id: 3,
-      title: 'Services',
-      text: 'Services',
-      linkTo: '/services',
+      title: 'Tours du lịch',
+      text: 'Tours du lịch',
+      linkTo: '/tours-travel',
     },
     {
       id: 4,
-      title: 'Packages',
-      text: 'Packages',
-      linkTo: '/packages',
+      title: 'Thuê xe du lịch',
+      text: 'Thuê xe du lịch',
+      linkTo: '/rent-car',
+    },
+    {
+      id: 4,
+      title: 'Khách sạn',
+      text: 'Khách sạn',
+      linkTo: '/hotel',
     },
     {
       id: 5,
-      title: 'Contact',
-      text: 'Contact Us',
+      title: 'Liên hệ',
+      text: 'Liên hệ chúng tôi',
       linkTo: '/contact',
     },
   ];
@@ -55,8 +61,8 @@ const Header = ({ namePage, title }) => {
   }
 
   const location = useLocation();
-  const item = navbarData.filter(
-    (item) => item.linkTo === location.pathname
+  const item = navbarData.filter((item) =>
+    location.pathname.includes(item.linkTo)
   )[0];
 
   return (
@@ -161,7 +167,7 @@ const Header = ({ namePage, title }) => {
                     <p class='fs-4 text-white mb-4 animated slideInDown'>
                       Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
                     </p>
-                    <div class='position-relative w-75 mx-auto animated slideInDown'>
+                    {/* <div class='position-relative w-75 mx-auto animated slideInDown'>
                       <input
                         class='form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5'
                         type='text'
@@ -174,13 +180,13 @@ const Header = ({ namePage, title }) => {
                       >
                         Search
                       </button>
-                    </div>
+                    </div> */}
                   </>
                 ) : (
                   <nav aria-label='breadcrumb'>
                     <ol class='breadcrumb justify-content-center'>
                       <li class='breadcrumb-item'>
-                        <a href='/'>Home</a>
+                        <a href='/'>Trang chủ</a>
                       </li>
                       <li
                         class='breadcrumb-item text-white active'
