@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -13,7 +13,7 @@ import './bootstrap.min.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
@@ -24,7 +24,7 @@ function App() {
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
