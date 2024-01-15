@@ -59,10 +59,9 @@ const Header = () => {
       </li>
     );
   }
-
   const location = useLocation();
-  const item = navbarData.filter((item) =>
-    location.pathname.includes(item.linkTo)
+  const item = navbarData.filter(
+    (item) => location.pathname === item.linkTo
   )[0];
 
   return (
@@ -184,7 +183,7 @@ const Header = () => {
                   </>
                 ) : (
                   <nav aria-label='breadcrumb'>
-                    <ol class='breadcrumb justify-content-center'>
+                    <ol class='sub-title justify-content-center'>
                       <li class='breadcrumb-item'>
                         <a href='/'>Trang chủ</a>
                       </li>
