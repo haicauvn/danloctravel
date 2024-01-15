@@ -35,12 +35,6 @@ const AboutUs = () => {
                 lịch tuyệt vời với giá cả hợp lý.
               </p>
               <p class='mb-4'>
-                Chúng tôi sở hữu đội ngũ nhân viên chuyên nghiệp, nhiệt tình,
-                giàu kinh nghiệm, luôn sẵn sàng hỗ trợ du khách trong suốt
-                chuyến đi. Chúng tôi cũng hợp tác với các nhà cung cấp dịch vụ
-                uy tín, đảm bảo chất lượng dịch vụ tốt nhất cho du khách.
-              </p>
-              <p class='mb-4'>
                 Chúng tôi cung cấp đa dạng các loại tour du lịch từ tour trong
                 ngày đến tour nhiều ngày, tour trọn gói đến tour tự do. Chúng
                 tôi cũng cung cấp dịch vụ đặt vé máy bay, khách sạn, xe du

@@ -1,9 +1,63 @@
 import React from 'react';
+import {
+  NavLink,
+  useLocation,
+  useMatch,
+  useResolvedPath,
+} from 'react-router-dom';
 import './style.css';
-import { useNavigate } from 'react-router-dom';
 
 const Header = ({ namePage, title }) => {
-  const navigate = useNavigate();
+  const navbarData = [
+    {
+      id: 1,
+      title: 'Home',
+      text: 'Enjoy Your Vacation With Us',
+      linkTo: '/',
+    },
+    {
+      id: 2,
+      title: 'About',
+      text: 'About Us',
+      linkTo: '/about',
+    },
+    {
+      id: 3,
+      title: 'Services',
+      text: 'Services',
+      linkTo: '/services',
+    },
+    {
+      id: 4,
+      title: 'Packages',
+      text: 'Packages',
+      linkTo: '/packages',
+    },
+    {
+      id: 5,
+      title: 'Contact',
+      text: 'Contact Us',
+      linkTo: '/contact',
+    },
+  ];
+
+  function CustomLink({ id, to, children, ...props }) {
+    const resolvedPath = useResolvedPath(to);
+    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+
+    return (
+      <li key={id} class={`nav-item nav-link ${isActive ? 'active' : ''}`}>
+        <NavLink to={to} {...props}>
+          {children}
+        </NavLink>
+      </li>
+    );
+  }
+
+  const location = useLocation();
+  const item = navbarData.filter(
+    (item) => item.linkTo === location.pathname
+  )[0];
 
   return (
     <div>
@@ -86,33 +140,11 @@ const Header = ({ namePage, title }) => {
           </button>
           <div class='collapse navbar-collapse' id='navbarCollapse'>
             <ul class='navbar-nav ms-auto py-0'>
-              <li
-                onClick={() => navigate('/')}
-                class='nav-item nav-link active'
-              >
-                Home
-              </li>
-              <li onClick={() => navigate('/about')} class='nav-item nav-link'>
-                About
-              </li>
-              <li
-                onClick={() => navigate('/services')}
-                class='nav-item nav-link'
-              >
-                Services
-              </li>
-              <li
-                onClick={() => navigate('/packages')}
-                class='nav-item nav-link'
-              >
-                Packages
-              </li>
-              <li
-                onClick={() => navigate('/contact')}
-                class='nav-item nav-link'
-              >
-                Contact
-              </li>
+              {navbarData.map((item) => (
+                <CustomLink id={item.id} to={item.linkTo}>
+                  {item.title}
+                </CustomLink>
+              ))}
             </ul>
           </div>
         </nav>
@@ -122,13 +154,12 @@ const Header = ({ namePage, title }) => {
             <div class='row justify-content-center py-5'>
               <div class='col-lg-10 pt-lg-5 mt-lg-5 text-center'>
                 <h1 class='display-3 text-white mb-3 animated slideInDown'>
-                  {title}
+                  {item.text}
                 </h1>
-                {namePage === 'home' ? (
+                {location.pathname === '/' ? (
                   <>
                     <p class='fs-4 text-white mb-4 animated slideInDown'>
-                      Tempor erat elitr rebum at clita diam amet diam et eos
-                      erat ipsum lorem sit
+                      Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
                     </p>
                     <div class='position-relative w-75 mx-auto animated slideInDown'>
                       <input
@@ -149,13 +180,13 @@ const Header = ({ namePage, title }) => {
                   <nav aria-label='breadcrumb'>
                     <ol class='breadcrumb justify-content-center'>
                       <li class='breadcrumb-item'>
-                        <a href='#'>Home</a>
+                        <a href='/'>Home</a>
                       </li>
                       <li
                         class='breadcrumb-item text-white active'
                         aria-current='page'
                       >
-                        {namePage}
+                        {item.title}
                       </li>
                     </ol>
                   </nav>
