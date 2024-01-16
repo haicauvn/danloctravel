@@ -62,42 +62,42 @@ const Footer = () => {
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-1.jpg'
+                    src={require('../../img/package-1.jpg')}
                     alt=''
                   />
                 </div>
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-2.jpg'
+                    src={require('../../img/package-2.jpg')}
                     alt=''
                   />
                 </div>
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-3.jpg'
+                    src={require('../../img/package-3.jpg')}
                     alt=''
                   />
                 </div>
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-2.jpg'
+                    src={require('../../img/package-2.jpg')}
                     alt=''
                   />
                 </div>
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-3.jpg'
+                    src={require('../../img/package-3.jpg')}
                     alt=''
                   />
                 </div>
                 <div class='col-4'>
                   <img
                     class='img-fluid bg-light p-1'
-                    src='img/package-1.jpg'
+                    src={require('../../img/package-1.jpg')}
                     alt=''
                   />
                 </div>

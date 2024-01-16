@@ -15,7 +15,7 @@ const AboutUs = () => {
               <div class='position-relative h-100'>
                 <img
                   class='img-fluid position-absolute w-100 h-100'
-                  src='img/about.jpg'
+                  src={require('../../../../img/about.jpg')}
                   alt=''
                   style={{ objectFit: 'cover' }}
                 />

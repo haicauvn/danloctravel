@@ -34,13 +34,13 @@ const Header = () => {
       linkTo: '/rent-car',
     },
     {
-      id: 4,
+      id: 5,
       title: 'Khách sạn',
       text: 'Khách sạn',
       linkTo: '/hotel',
     },
     {
-      id: 5,
+      id: 6,
       title: 'Liên hệ',
       text: 'Liên hệ chúng tôi',
       linkTo: '/contact',
@@ -52,7 +52,7 @@ const Header = () => {
     const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
     return (
-      <li key={id} class={`nav-item nav-link ${isActive ? 'active' : ''}`}>
+      <li class={`nav-item nav-link ${isActive ? 'active' : ''}`}>
         <NavLink to={to} {...props}>
           {children}
         </NavLink>
@@ -146,7 +146,7 @@ const Header = () => {
           <div class='collapse navbar-collapse' id='navbarCollapse'>
             <ul class='navbar-nav ms-auto py-0'>
               {navbarData.map((item) => (
-                <CustomLink id={item.id} to={item.linkTo}>
+                <CustomLink key={item.id} to={item.linkTo}>
                   {item.title}
                 </CustomLink>
               ))}

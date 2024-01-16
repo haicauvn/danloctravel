@@ -1,5 +1,6 @@
-import { HashRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import './bootstrap.min.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import PageNotFound from './pages/404/PageNotFound';
@@ -8,8 +9,6 @@ import Contact from './pages/contact/Contact';
 import DetailTour from './pages/details/DetailTour';
 import HomePage from './pages/homePage/HomePage';
 import ToursTravel from './pages/toursTravel/ToursTravel';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './bootstrap.min.css';
 
 function App() {
   return (
