@@ -11,6 +11,7 @@
     "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
     "easing": "^1.2.1",
+    "firebase": "^10.7.1",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.44",
     "owl.carousel": "^2.3.4",
