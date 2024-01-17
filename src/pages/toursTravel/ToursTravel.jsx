@@ -5,8 +5,6 @@ const ToursTravel = () => {
   return (
     <div>
       <Tours />
-      <Tours />
-      <Tours />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import PageNotFound from './pages/404/PageNotFound';
 import About from './pages/about/About';
+import AddProduct from './pages/admin/addProduct/AddProduct';
 import Contact from './pages/contact/Contact';
 import DetailTour from './pages/details/DetailTour';
 import HomePage from './pages/homePage/HomePage';
@@ -20,6 +21,7 @@ function App() {
         <Route path='/tours-travel' element={<ToursTravel />} />
         <Route path='/tours-travel/:id' element={<DetailTour />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/add-product' element={<AddProduct />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />

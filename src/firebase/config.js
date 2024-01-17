@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 
-import 'firebase/analytics';
-import 'firebase/firestore';
+import 'firebase/compat/analytics';
+import 'firebase/compat/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
