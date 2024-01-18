@@ -1,0 +1,114 @@
+.product-status {
+  padding: 30px 40px;
+  margin: 60px;
+  border: none !important;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.add-product a {
+  float: right;
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  padding: 6px 20px;
+  border-radius: 4px;
+  background: #152036;
+  color: #fff;
+}
+
+.product-status-wrap {
+  padding: 20px;
+}
+
+.product-status-wrap h4 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.product-status-wrap table {
+  width: 100%;
+}
+.product-status-wrap table th {
+  padding: 20px 5px;
+  vertical-align: top;
+  border-top: 1px solid #152036;
+}
+.product-status-wrap table th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #152036;
+}
+.product-status-wrap th,
+.product-status-wrap td {
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+.product-status-wrap table td {
+  padding: 9px 7px;
+  border-top: 1px solid #152036;
+  font-size: 14px;
+}
+.product-status-wrap img {
+  width: 60px;
+}
+.custom-pagination ul.pagination li a {
+  background-color: #152036;
+  border: 1px solid #152036;
+}
+.custom-pagination ul.pagination {
+  margin-bottom: 0px;
+}
+.product-status-wrap .pd-setting {
+  border: none;
+  padding: 5px 15px;
+  font-size: 15px;
+  background: #24caa1;
+  border-radius: 3px;
+}
+.product-status-wrap .ps-setting {
+  border: none;
+  padding: 5px 15px;
+  font-size: 15px;
+  background: #2eb7f3;
+  border-radius: 3px;
+}
+.product-status-wrap .ds-setting {
+  border: none;
+  padding: 5px 15px;
+  font-size: 15px;
+  background: #eb4b4b;
+  border-radius: 3px;
+}
+
+button.pd-setting-ed {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #152036;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.mg-b-pro-edt {
+  margin-bottom: 15px;
+}
+
+ul.tab-custon-design li,
+ul.tab-review-design li {
+  display: inline-block;
+}
+.product-status-wrap.border-pdt-ct p {
+  font-size: 14px;
+}
+
+.product-status-wrap {
+  border: 0px solid rgba(0, 0, 0, 0.12);
+  padding: 0px;
+}
+.product-status-wrap table th {
+  border: 0px solid rgba(0, 0, 0, 0.12);
+}
+
+.product-status-wrap.border-pdt-ct {
+  box-shadow: none;
+}

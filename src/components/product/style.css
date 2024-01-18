@@ -10,3 +10,17 @@
 .product-item:hover img {
   transform: scale(1.1);
 }
+
+.product-title {
+  height: 3em;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1.5em; /* fallback */
+  max-height: 3em; /* fallback */
+}

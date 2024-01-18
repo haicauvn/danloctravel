@@ -1,11 +1,31 @@
-import React from 'react';
-import Tours from '../homePage/components/tours/Tours';
+import React, { useMemo } from 'react';
+import useFirestore from '../../hooks/useFirestore';
+import Products from '../../components/products/Products';
 
 const ToursTravel = () => {
+  const conditionProduct = useMemo(
+    () => ({
+      fieldName: 'typeProduct',
+      operator: '==',
+      compareValue: 'tour-travel',
+    }),
+    []
+  );
+  const toursData = useFirestore('product', conditionProduct);
+
   return (
-    <div>
-      <Tours />
-    </div>
+    <>
+      <Products
+        data={toursData}
+        typeProduct={'Tours'}
+        title='Tour du lịch Đà Nẵng'
+      />
+      <Products
+        data={toursData}
+        typeProduct={'Tours'}
+        title='Tour du lịch Huế'
+      />
+    </>
   );
 };
 
