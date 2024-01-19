@@ -5,14 +5,14 @@
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.add-product a {
+.add-product-btn p {
   float: right;
   position: absolute;
   top: 20px;
   right: 35px;
   padding: 6px 20px;
   border-radius: 4px;
-  background: #152036;
+  background: #86b817;
   color: #fff;
 }
 
@@ -57,23 +57,22 @@
 .custom-pagination ul.pagination {
   margin-bottom: 0px;
 }
-.product-status-wrap .pd-setting {
-  border: none;
-  padding: 5px 15px;
-  font-size: 15px;
-  background: #24caa1;
-  border-radius: 3px;
-}
+
 .product-status-wrap .ps-setting {
+  width: 30px;
+  height: 30px;
   border: none;
-  padding: 5px 15px;
+  padding: 0 10px;
   font-size: 15px;
   background: #2eb7f3;
   border-radius: 3px;
 }
 .product-status-wrap .ds-setting {
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
   border: none;
-  padding: 5px 15px;
+  padding: 0 10px;
   font-size: 15px;
   background: #eb4b4b;
   border-radius: 3px;

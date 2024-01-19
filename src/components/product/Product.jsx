@@ -5,7 +5,6 @@ import './style.css';
 const Product = ({ product }) => {
   const navigate = useNavigate();
   //   const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL;
-
   return (
     <div class='col-lg-3 col-md-6 wow fadeInUp' data-wow-delay='0.1s'>
       <div class='product-item'>
@@ -42,7 +41,7 @@ const Product = ({ product }) => {
             <div
               class='btn btn-sm btn-primary px-3 border-end'
               style={{ borderRadius: '30px' }}
-              onClick={() => navigate(`/detail/${product.id}`)}
+              onClick={() => navigate(`/detail/${product.uuid}`)}
             >
               Xem chi tiết
             </div>

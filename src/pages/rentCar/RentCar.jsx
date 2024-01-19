@@ -1,17 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useContext } from 'react';
 import Products from '../../components/products/Products';
-import useFirestore from '../../hooks/useFirestore';
+import { AppContext } from '../../context/AppProvider';
 
 const RentCar = () => {
-  const conditionProduct = useMemo(
-    () => ({
-      fieldName: 'typeProduct',
-      operator: '==',
-      compareValue: 'rent-car',
-    }),
-    []
-  );
-  const carData = useFirestore('product', conditionProduct);
+  const { carData } = useContext(AppContext);
 
   return (
     <Products data={carData} typeProduct={'Rent car'} title='Xe du lịch' />

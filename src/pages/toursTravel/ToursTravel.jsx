@@ -1,17 +1,9 @@
-import React, { useMemo } from 'react';
-import useFirestore from '../../hooks/useFirestore';
+import React, { useContext } from 'react';
 import Products from '../../components/products/Products';
+import { AppContext } from '../../context/AppProvider';
 
 const ToursTravel = () => {
-  const conditionProduct = useMemo(
-    () => ({
-      fieldName: 'typeProduct',
-      operator: '==',
-      compareValue: 'tour-travel',
-    }),
-    []
-  );
-  const toursData = useFirestore('product', conditionProduct);
+  const { toursData } = useContext(AppContext);
 
   return (
     <>

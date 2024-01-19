@@ -1,20 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useContext } from 'react';
 import Products from '../../components/products/Products';
-import useFirestore from '../../hooks/useFirestore';
+import { AppContext } from '../../context/AppProvider';
 import AboutUs from './components/aboutUs/AboutUs';
 import Services from './components/services/Services';
 import './style.css';
 
 const HomePage = () => {
-  const conditionProduct = useMemo(
-    () => ({
-      fieldName: 'typeProduct',
-      operator: '==',
-      compareValue: 'tour-travel',
-    }),
-    []
-  );
-  const toursData = useFirestore('product', conditionProduct);
+  const { toursData } = useContext(AppContext);
 
   return (
     <div>
