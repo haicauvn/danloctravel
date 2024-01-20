@@ -14,6 +14,7 @@
   border-radius: 4px;
   background: #86b817;
   color: #fff;
+  cursor: pointer;
 }
 
 .product-status-wrap {

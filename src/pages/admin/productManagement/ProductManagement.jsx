@@ -46,7 +46,7 @@ const ProductManagement = () => {
                   </tr>
                   {toursData &&
                     toursData.map((item) => (
-                      <tr>
+                      <tr key={item.uuid}>
                         <td>
                           <img
                             src={require(`../../../img/${item.nameImage}`)}
@@ -55,7 +55,9 @@ const ProductManagement = () => {
                         </td>
                         <td>{item.title}</td>
                         <td>{item.time}</td>
-                        <td>{item.price}</td>
+                        <td>
+                          {item.price} <i>vnđ</i>
+                        </td>
                         <td>
                           <button
                             class='ps-setting'

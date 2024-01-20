@@ -1,23 +1,29 @@
+import { doc, setDoc } from 'firebase/firestore';
+import { useContext, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { uid } from 'uid';
+import { AppContext } from '../../../context/AppProvider';
+import { db } from '../../../firebase/config';
 import { addDocument } from '../../../firebase/services';
-import useFirestore from '../../../hooks/useFirestore';
 import './style.css';
-import { useMemo, useState } from 'react';
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  const uuid = uid();
+  const { productId } = useParams();
+  const isAddMode = !productId;
+  const { allProductsData } = useContext(AppContext);
 
   const {
+    reset,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const uuid = uid();
-
-  const onSubmit = (data) => {
+  const handleCreateProduct = (data) => {
     addDocument('products', {
       uuid,
       title: data.title,
@@ -30,38 +36,55 @@ const AddProduct = () => {
     navigate('/admin');
   };
 
-  const { productId } = useParams();
-
-  const productCondition = useMemo(() => {
-    return {
-      fieldName: 'uuid',
-      operator: '==',
-      compareValue: productId,
-    };
-  }, [productId]);
-
-  const product = useFirestore('products', productCondition)[0];
-  console.log('product', product);
-  const [values, setInputValues] = useState(product);
-
-  const handleChange = (event) => {
-    setInputValues({ [event.target.name]: event.target.value });
+  const handleUpdateProduct = (data) => {
+    const newData = { ...product, ...data };
+    const docRef = doc(db, 'products', product.id);
+    setDoc(docRef, newData)
+      .then((docRef) => {
+        alert('Entire Document has been updated successfully');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    navigate('/admin');
   };
 
-  console.log('values', values);
+  const onSubmit = (data) =>
+    isAddMode ? handleCreateProduct(data) : handleUpdateProduct(data);
+
+  const product = useMemo(
+    () => allProductsData?.find((item) => item.uuid === productId) || {},
+    [allProductsData, productId]
+  );
+
+  // get user and set form fields
+  useEffect(() => {
+    if (!isAddMode) {
+      const fields = [
+        'title',
+        'nameImage',
+        'price',
+        'typeProduct',
+        'time',
+        'description',
+      ];
+      fields.forEach((field) => setValue(field, product[field]));
+    }
+  }, [isAddMode, product, setValue]);
 
   return (
     <div class='container-fluid px-1 py-5 mx-auto add-product'>
       <div class='row d-flex justify-content-center'>
         <div class='col-xl-7 col-lg-8 col-md-9 col-11 text-center'>
-          <h3>Request a Demo</h3>
-          <p class='blue-text'>
-            Just answer a few questions
-            <br /> so that we can personalize the right experience for you.
-          </p>
           <div class='card'>
-            <h5 class='text-center mb-4'>Powering world-class companies</h5>
-            <form class='form-card' onSubmit={handleSubmit(onSubmit)}>
+            <h3 class='text-center mb-5'>
+              {isAddMode ? 'Create product' : 'Update product'}
+            </h3>
+            <form
+              class='form-card'
+              onSubmit={handleSubmit(onSubmit)}
+              onReset={reset}
+            >
               <div class='row justify-content-between text-left'>
                 <div class='form-group col-sm-6 flex-column d-flex'>
                   {' '}
@@ -74,49 +97,8 @@ const AddProduct = () => {
                     {...register('title', {
                       required: true,
                     })}
-                    value={values?.title}
-                    onChange={handleChange}
                   />
                   {errors.title && <p>Title is required and must be valid</p>}{' '}
-                </div>
-                <div class='form-group col-sm-6 flex-column d-flex'>
-                  {' '}
-                  <label class='form-control-label px-3'>
-                    Type product<span class='text-danger'> *</span>
-                  </label>{' '}
-                  <select
-                    autoComplete='off'
-                    {...register('typeProduct', {
-                      required: true,
-                    })}
-                    value={values?.typeProduct}
-                    onChange={handleChange}
-                  >
-                    <option value='tour-travel'>Tour du lịch</option>
-                    <option value='rent-car'>Thuê xe du lịch</option>
-                    <option value='hotel'>Khách sạn</option>
-                  </select>{' '}
-                  {errors.typeProduct && (
-                    <p>Type product is required and must be valid</p>
-                  )}{' '}
-                </div>
-              </div>
-              <div class='row justify-content-between text-left'>
-                <div class='form-group col-sm-6 flex-column d-flex'>
-                  {' '}
-                  <label class='form-control-label px-3'>
-                    Price<span class='text-danger'> *</span>
-                  </label>{' '}
-                  <input
-                    type='text'
-                    autoComplete='off'
-                    {...register('price', {
-                      required: true,
-                    })}
-                    value={values?.price}
-                    onChange={handleChange}
-                  />
-                  {errors.price && <p>Price is required and must be valid</p>}{' '}
                 </div>
                 <div class='form-group col-sm-6 flex-column d-flex'>
                   {' '}
@@ -129,8 +111,6 @@ const AddProduct = () => {
                     {...register('nameImage', {
                       required: true,
                     })}
-                    value={values?.nameImage}
-                    onChange={handleChange}
                   />
                   {errors.nameImage && (
                     <p>Name image is required and must be valid</p>
@@ -149,10 +129,47 @@ const AddProduct = () => {
                     {...register('time', {
                       required: true,
                     })}
-                    value={values?.time}
-                    onChange={handleChange}
                   />
                   {errors.time && <p>Time is required and must be valid</p>}{' '}
+                </div>
+
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
+                    Type product<span class='text-danger'> *</span>
+                  </label>{' '}
+                  <select
+                    autoComplete='off'
+                    {...register('typeProduct', {
+                      required: true,
+                    })}
+                  >
+                    <option value='tour-travel'>Tour du lịch</option>
+                    <option value='rent-car'>Thuê xe du lịch</option>
+                    <option value='hotel'>Khách sạn</option>
+                  </select>{' '}
+                  {errors.typeProduct && (
+                    <p>Type product is required and must be valid</p>
+                  )}{' '}
+                </div>
+              </div>
+              <div class='row justify-content-between text-left'>
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
+                    Price<span class='text-danger'> *</span>
+                  </label>{' '}
+                  <div>
+                    <input
+                      type='text'
+                      autoComplete='off'
+                      {...register('price', {
+                        required: true,
+                      })}
+                    />{' '}
+                    <i>vnđ</i>
+                  </div>
+                  {errors.price && <p>Price is required and must be valid</p>}{' '}
                 </div>
               </div>
               <div class='row justify-content-between text-left'>
@@ -162,14 +179,12 @@ const AddProduct = () => {
                     Description
                     <span class='text-danger'> *</span>
                   </label>{' '}
-                  <input
+                  <textarea
                     type='text'
                     autoComplete='off'
                     {...register('description', {
                       required: true,
                     })}
-                    value={values?.description}
-                    onChange={handleChange}
                   />
                   {errors.description && (
                     <p>Description is required and must be valid</p>
@@ -179,17 +194,18 @@ const AddProduct = () => {
               <div class='row justify-content-end'>
                 <div class='form-group col-sm-6'>
                   {' '}
-                  {!product ? (
-                    <button type='submit' class='btn-block btn-primary'>
-                      Add
-                    </button>
-                  ) : (
-                    <>
-                      <button type='submit' class='btn-block btn-success'>
-                        Update
-                      </button>
-                    </>
-                  )}{' '}
+                  <button type='submit' class='btn-block btn-primary'>
+                    Save
+                  </button>{' '}
+                </div>
+                <div class='form-group col-sm-6'>
+                  <button
+                    onClick={() => navigate('/admin')}
+                    type='button'
+                    class='btn-block btn-warning'
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>
