@@ -1,18 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useGetUrlImage from '../../hooks/useGetUrlImage';
 import './style.css';
 
 const Product = ({ product }) => {
   const navigate = useNavigate();
-  //   const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL;
+  const urlImage = useGetUrlImage(product);
+
   return (
     <div class='col-lg-3 col-md-6 wow fadeInUp' data-wow-delay='0.1s'>
-      <div class='product-item'>
-        <div class='overflow-hidden'>
+      <div class='product-item text-center'>
+        <div class='overflow-hidden' style={{ minHeight: '200px' }}>
           <img
             class='img-fluid'
-            //   src={require(`${imageBaseUrl}/package-1.jpg`)}
-            src={require(`../../img/${product.nameImage}`)}
+            style={{ maxHeight: '200px' }}
+            src={urlImage}
             alt=''
           />
         </div>

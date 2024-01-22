@@ -155,41 +155,9 @@ const Header = () => {
                 <h1 class='display-3 text-white mb-3 animated slideInDown'>
                   {item ? item.text : ''}
                 </h1>
-                {location.pathname === '/' ? (
-                  <>
-                    <p class='fs-4 text-white mb-4 animated slideInDown'>
-                      Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
-                    </p>
-                    {/* <div class='position-relative w-75 mx-auto animated slideInDown'>
-                      <input
-                        class='form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5'
-                        type='text'
-                        placeholder='Eg: Thailand'
-                      />
-                      <button
-                        type='button'
-                        class='btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2'
-                        style={{ marginTop: '7px' }}
-                      >
-                        Search
-                      </button>
-                    </div> */}
-                  </>
-                ) : (
-                  <nav aria-label='breadcrumb'>
-                    <ol class='sub-title justify-content-center'>
-                      <li class='breadcrumb-item'>
-                        <a href='/'>Trang chủ</a>
-                      </li>
-                      <li
-                        class='breadcrumb-item text-white active'
-                        aria-current='page'
-                      >
-                        {item ? item.title : ''}
-                      </li>
-                    </ol>
-                  </nav>
-                )}
+                <p class='fs-4 text-white mb-4 animated slideInDown'>
+                  Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
+                </p>
               </div>
             </div>
           </div>

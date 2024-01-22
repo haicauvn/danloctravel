@@ -1,10 +1,11 @@
 import { doc, setDoc } from 'firebase/firestore';
-import { useContext, useEffect, useMemo } from 'react';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { uid } from 'uid';
 import { AppContext } from '../../../context/AppProvider';
-import { db } from '../../../firebase/config';
+import { db, storage } from '../../../firebase/config';
 import { addDocument } from '../../../firebase/services';
 import './style.css';
 
@@ -14,6 +15,8 @@ const AddProduct = () => {
   const { productId } = useParams();
   const isAddMode = !productId;
   const { allProductsData } = useContext(AppContext);
+  const [imageUpload, setImageUpload] = useState(null);
+  const [nameImage, setNameImage] = useState('');
 
   const {
     reset,
@@ -23,22 +26,39 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm();
 
+  const handleOnChangeUpload = (event) => {
+    const fileUpload = event.target.files[0];
+    if (!fileUpload) return;
+    setNameImage(fileUpload.name + uuid);
+    setImageUpload(fileUpload);
+  };
+
+  const uploadFile = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${nameImage}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {});
+    });
+  };
+
   const handleCreateProduct = (data) => {
     addDocument('products', {
       uuid,
       title: data.title,
       typeProduct: data.typeProduct,
       price: data.price,
-      nameImage: data.nameImage,
+      nameImage,
       time: data.time,
       description: data.description,
     });
+    uploadFile();
     navigate('/admin');
   };
 
   const handleUpdateProduct = (data) => {
     const newData = { ...product, ...data };
     const docRef = doc(db, 'products', product.id);
+
     setDoc(docRef, newData)
       .then((docRef) => {
         alert('Entire Document has been updated successfully');
@@ -49,8 +69,10 @@ const AddProduct = () => {
     navigate('/admin');
   };
 
-  const onSubmit = (data) =>
+  const onSubmit = (data) => {
+    console.log('data', data);
     isAddMode ? handleCreateProduct(data) : handleUpdateProduct(data);
+  };
 
   const product = useMemo(
     () => allProductsData?.find((item) => item.uuid === productId) || {},
@@ -71,6 +93,13 @@ const AddProduct = () => {
       fields.forEach((field) => setValue(field, product[field]));
     }
   }, [isAddMode, product, setValue]);
+
+  // const tagOptions = [
+  //   { value: 'danang', label: 'Đà Nẵng' },
+  //   { value: 'dalat', label: 'Đà Lạt' },
+  //   { value: 'hue', label: 'Huế' },
+  //   { value: 'other', label: 'Khác' },
+  // ];
 
   return (
     <div class='container-fluid px-1 py-5 mx-auto add-product'>
@@ -105,13 +134,7 @@ const AddProduct = () => {
                   <label class='form-control-label px-3'>
                     Name image<span class='text-danger'> *</span>
                   </label>{' '}
-                  <input
-                    type='text'
-                    autoComplete='off'
-                    {...register('nameImage', {
-                      required: true,
-                    })}
-                  />
+                  <input type='file' onChange={handleOnChangeUpload} />
                   {errors.nameImage && (
                     <p>Name image is required and must be valid</p>
                   )}{' '}

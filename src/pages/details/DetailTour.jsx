@@ -1,19 +1,53 @@
 import React, { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../../context/AppProvider';
+import useGetUrlImage from '../../hooks/useGetUrlImage';
 import './style.css';
+
+const Product = ({ item }) => {
+  const urlImage = useGetUrlImage(item);
+
+  return (
+    <>
+      <div class='d-flex mb-3'>
+        <a href='#' class='me-3'>
+          <img
+            src={urlImage}
+            style={{
+              width: '96px',
+              height: '96px',
+            }}
+            alt=''
+            class='img-md img-thumbnail'
+          />
+        </a>
+        <div class='info'>
+          <a href='#' class='nav-link'>
+            {item.title}
+          </a>
+          <div class='text-dark ml-3'>
+            {item.price}
+            <i> vnđ</i>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 const DetailTour = () => {
   const { uuid } = useParams();
   const { allProductsData } = useContext(AppContext);
 
-  const product = useMemo(
-    () => allProductsData?.find((item) => item.uuid === uuid) || {},
+  const productData = useMemo(
+    () => allProductsData.find((item) => item.uuid === uuid) || {},
     [allProductsData, uuid]
   );
 
+  const urlImage = useGetUrlImage(productData);
+
   return (
-    <div>
+    <>
       {/* content */}
       <section class='py-5'>
         <div class='container'>
@@ -28,13 +62,13 @@ const DetailTour = () => {
                   }}
                   alt=''
                   class='rounded-4 fit'
-                  src={require(`../../img/${product.nameImage}`)}
+                  src={urlImage}
                 />
               </div>
             </aside>
             <main class='col-lg-6'>
               <div class='ps-lg-3'>
-                <h4 class='title text-dark'>{product.title}</h4>
+                <h4 class='title text-dark'>{productData.title}</h4>
                 <div class='d-flex flex-row my-3'>
                   <div class='text-warning mb-1 me-2'>
                     <small class='fa fa-star text-primary'></small>
@@ -47,7 +81,7 @@ const DetailTour = () => {
 
                 <div class='mb-3'>
                   <span class='h5'>
-                    {product.price} <i>vnđ</i>
+                    {productData.price} <i>vnđ</i>
                   </span>
                 </div>
 
@@ -202,41 +236,24 @@ const DetailTour = () => {
                 </div>
               </div>
             </div>
-            <div class='col-lg-4'>
-              <div class='px-0  rounded-2 shadow-0'>
-                <div class='card'>
-                  <div class='card-body'>
-                    <h5 class='card-title'>Similar items</h5>
-                    {allProductsData.slice(0, 4).map((item) => (
-                      <div class='d-flex mb-3'>
-                        <a href='#' class='me-3'>
-                          <img
-                            src={require(`../../img/${item.nameImage}`)}
-                            style={{
-                              minWidth: '96px',
-                              height: '96px',
-                            }}
-                            alt=''
-                            class='img-md img-thumbnail'
-                          />
-                        </a>
-                        <div class='info'>
-                          <a href='#' class='nav-link mb-1'>
-                            {item.title}
-                          </a>
-                          <strong class='text-dark'> {item.price}</strong>
-                          <i>vnđ</i>
-                        </div>
-                      </div>
-                    ))}
+            {allProductsData.length && (
+              <div class='col-lg-4'>
+                <div class='px-0  rounded-2 shadow-0'>
+                  <div class='card'>
+                    <div class='card-body'>
+                      <h5 class='card-title'>Similar items</h5>
+                      {allProductsData.slice(0, 4).map((item) => (
+                        <Product item={item} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
