@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../../context/AppProvider';
 import useGetUrlImage from '../../hooks/useGetUrlImage';
+import PageNotFound from '../../pages/404/PageNotFound';
 import './style.css';
 
 const Product = ({ item }) => {
@@ -46,6 +47,8 @@ const DetailTour = () => {
 
   const urlImage = useGetUrlImage(productData);
 
+  if (!productData.title) return <PageNotFound />;
+
   return (
     <>
       {/* content */}
@@ -57,7 +60,7 @@ const DetailTour = () => {
                 <img
                   style={{
                     maxWidth: '100%',
-                    maxHeight: '100vh',
+                    maxHeight: '50vh',
                     margin: 'auto',
                   }}
                   alt=''
@@ -84,33 +87,25 @@ const DetailTour = () => {
                     {productData.price} <i>vnđ</i>
                   </span>
                 </div>
-
-                <p>
-                  Modern look and quality demo item is a streetwear-inspired
-                  collection that continues to break away from the conventions
-                  of mainstream fashion. Made in Italy, these black and brown
-                  clothing low-top shirts for men.
-                </p>
-
+                <div class='mb-2'>
+                  <b>{productData.description}</b>
+                </div>
                 <div class='row'>
-                  <dt class='col-3'>Type:</dt>
-                  <dd class='col-9'>Regular</dd>
+                  <dt class='col-3'>Khách sạn:</dt>
+                  <dd class='col-9'>{productData.typeHotel}</dd>
 
-                  <dt class='col-3'>Color</dt>
-                  <dd class='col-9'>Brown</dd>
+                  <dt class='col-3'>Khởi hành:</dt>
+                  <dd class='col-9'>{productData.depart}</dd>
 
-                  <dt class='col-3'>Material</dt>
-                  <dd class='col-9'>Cotton, Jeans</dd>
-
-                  <dt class='col-3'>Brand</dt>
-                  <dd class='col-9'>Reebook</dd>
+                  <dt class='col-3'>Phương tiện:</dt>
+                  <dd class='col-9'>{productData.pickup}</dd>
                 </div>
 
                 <hr />
 
                 <a href='#' class='btn btn-primary shadow-0'>
                   {' '}
-                  Buy now{' '}
+                  Book now{' '}
                 </a>
               </div>
             </main>
@@ -130,108 +125,7 @@ const DetailTour = () => {
                     role='tabpanel'
                     aria-labelledby='ex1-tab-1'
                   >
-                    <p>
-                      With supporting text below as a natural lead-in to
-                      additional content. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                      dolor in reprehenderit in voluptate velit esse cillum
-                      dolore eu fugiat nulla pariatur.
-                    </p>
-                    <p>
-                      With supporting text below as a natural lead-in to
-                      additional content. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                      dolor in reprehenderit in voluptate velit esse cillum
-                      dolore eu fugiat nulla pariatur.
-                    </p>
-                    <p>
-                      With supporting text below as a natural lead-in to
-                      additional content. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                      dolor in reprehenderit in voluptate velit esse cillum
-                      dolore eu fugiat nulla pariatur.
-                    </p>
-                    <p>
-                      With supporting text below as a natural lead-in to
-                      additional content. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                      dolor in reprehenderit in voluptate velit esse cillum
-                      dolore eu fugiat nulla pariatur.
-                    </p>
-                    <div class='row mb-2'>
-                      <div class='col-12 col-md-6'>
-                        <ul class='list-unstyled mb-0'>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Some
-                            great feature name here
-                          </li>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Lorem
-                            ipsum dolor sit amet, consectetur
-                          </li>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Duis
-                            aute irure dolor in reprehenderit
-                          </li>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>
-                            Optical heart sensor
-                          </li>
-                        </ul>
-                      </div>
-                      <div class='col-12 col-md-6 mb-0'>
-                        <ul class='list-unstyled'>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Easy
-                            fast and ver good
-                          </li>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Some
-                            great feature name here
-                          </li>
-                          <li>
-                            <i class='fas fa-check text-success me-2'></i>Modern
-                            style and design
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <table class='table border mt-3 mb-2'>
-                      <tr>
-                        <th class='py-2'>Display:</th>
-                        <td class='py-2'>
-                          13.3-inch LED-backlit display with IPS
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class='py-2'>Processor capacity:</th>
-                        <td class='py-2'>2.3GHz dual-core Intel Core i5</td>
-                      </tr>
-                      <tr>
-                        <th class='py-2'>Camera quality:</th>
-                        <td class='py-2'>720p FaceTime HD camera</td>
-                      </tr>
-                      <tr>
-                        <th class='py-2'>Memory</th>
-                        <td class='py-2'>8 GB RAM or 16 GB RAM</td>
-                      </tr>
-                      <tr>
-                        <th class='py-2'>Graphics</th>
-                        <td class='py-2'>Intel Iris Plus Graphics 640</td>
-                      </tr>
-                    </table>
+                    {productData.content}
                   </div>
                 </div>
               </div>

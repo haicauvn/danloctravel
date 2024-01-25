@@ -1,22 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Products from '../../components/products/Products';
 import { AppContext } from '../../context/AppProvider';
 
 const ToursTravel = () => {
   const { toursData } = useContext(AppContext);
+  const [toursDaNang, setToursDaNang] = useState([]);
+  const [toursHue, setToursHue] = useState([]);
+  const [toursOther, setToursOther] = useState([]);
+
+  useEffect(() => {
+    setToursDaNang(toursData.filter((item) => item.tags === 'da-nang'));
+    setToursHue(toursData.filter((item) => item.tags === 'hue'));
+    setToursOther(toursData.filter((item) => item.tags === 'other'));
+  }, [toursData]);
+  console.log('toursDaNang', toursDaNang);
 
   return (
     <>
       <Products
-        data={toursData}
+        data={toursDaNang}
         typeProduct={'Tours'}
         title='Tour du lịch Đà Nẵng'
       />
       <Products
-        data={toursData}
+        data={toursHue}
         typeProduct={'Tours'}
         title='Tour du lịch Huế'
       />
+      <Products data={toursOther} typeProduct={'Tours'} title='Tour du tự do' />
     </>
   );
 };

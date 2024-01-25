@@ -23,43 +23,45 @@ const Product = ({ item }) => {
   };
 
   return (
-    <tr key={item.uuid}>
-      <td>
-        <img
-          style={{ maxHeight: '60px', maxWidth: '60px' }}
-          src={urlImage}
-          alt=''
-        />
-      </td>
-      <td>{item.title}</td>
-      <td>{item.time}</td>
-      <td>
-        {item.price} <i>vnđ</i>
-      </td>
-      <td>
-        <button
-          class='ps-setting'
-          data-toggle='tooltip'
-          title='Edit'
-          onClick={() => navigate(`/admin/update-product/${item.uuid}`)}
-        >
-          <i class='fas fa-edit fa-xs'></i>
-        </button>
-        <button
-          data-toggle='tooltip'
-          title='Delete'
-          class='ds-setting'
-          onClick={() => handleDelete(item)}
-        >
-          <i class='fa fa-trash fa-xs' aria-hidden='true'></i>
-        </button>
-      </td>
-    </tr>
+    <tbody>
+      <tr>
+        <td>
+          <img
+            style={{ maxHeight: '60px', maxWidth: '60px' }}
+            src={urlImage}
+            alt=''
+          />
+        </td>
+        <td>{item.title}</td>
+        <td>{item.time}</td>
+        <td>
+          {item.price} <i>vnđ</i>
+        </td>
+        <td>
+          <button
+            class='ps-setting'
+            data-toggle='tooltip'
+            title='Edit'
+            onClick={() => navigate(`/admin/update-product/${item.uuid}`)}
+          >
+            <i class='fas fa-edit fa-xs'></i>
+          </button>
+          <button
+            data-toggle='tooltip'
+            title='Delete'
+            class='ds-setting'
+            onClick={() => handleDelete(item)}
+          >
+            <i class='fa fa-trash fa-xs' aria-hidden='true'></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
   );
 };
 
 const ProductManagement = () => {
-  const { toursData } = useContext(AppContext);
+  const { allProductsData } = useContext(AppContext);
   const navigate = useNavigate();
 
   return (
@@ -77,15 +79,19 @@ const ProductManagement = () => {
                   <p>Thêm sản phẩm</p>
                 </div>
                 <table>
-                  <tr>
-                    <th>Image</th>
-                    <th>Product Title</th>
-                    <th>Time</th>
-                    <th>Price</th>
-                    <th>Setting</th>
-                  </tr>
-                  {toursData &&
-                    toursData.map((item) => <Product item={item} />)}
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Product Title</th>
+                      <th>Time</th>
+                      <th>Price</th>
+                      <th>Setting</th>
+                    </tr>
+                  </thead>
+                  {allProductsData &&
+                    allProductsData.map((item) => (
+                      <Product key={item.uuid} item={item} />
+                    ))}
                 </table>
               </div>
             </div>

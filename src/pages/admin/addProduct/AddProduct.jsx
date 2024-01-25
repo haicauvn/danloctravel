@@ -44,19 +44,19 @@ const AddProduct = () => {
   const handleCreateProduct = (data) => {
     addDocument('products', {
       uuid,
-      title: data.title,
-      typeProduct: data.typeProduct,
-      price: data.price,
       nameImage,
-      time: data.time,
-      description: data.description,
+      ...data,
     });
     uploadFile();
     navigate('/admin');
   };
 
   const handleUpdateProduct = (data) => {
-    const newData = { ...product, ...data };
+    const newData = {
+      ...product,
+      ...data,
+      nameImage: nameImage.length > 0 ? nameImage : product.nameImage,
+    };
     const docRef = doc(db, 'products', product.id);
 
     setDoc(docRef, newData)
@@ -66,11 +66,11 @@ const AddProduct = () => {
       .catch((error) => {
         console.log(error);
       });
+    uploadFile();
     navigate('/admin');
   };
 
   const onSubmit = (data) => {
-    console.log('data', data);
     isAddMode ? handleCreateProduct(data) : handleUpdateProduct(data);
   };
 
@@ -86,20 +86,18 @@ const AddProduct = () => {
         'title',
         'nameImage',
         'price',
+        'tags',
         'typeProduct',
         'time',
         'description',
+        'content',
+        'depart',
+        'pickup',
+        'typeHotel',
       ];
       fields.forEach((field) => setValue(field, product[field]));
     }
   }, [isAddMode, product, setValue]);
-
-  // const tagOptions = [
-  //   { value: 'danang', label: 'Đà Nẵng' },
-  //   { value: 'dalat', label: 'Đà Lạt' },
-  //   { value: 'hue', label: 'Huế' },
-  //   { value: 'other', label: 'Khác' },
-  // ];
 
   return (
     <div class='container-fluid px-1 py-5 mx-auto add-product'>
@@ -180,6 +178,20 @@ const AddProduct = () => {
                 <div class='form-group col-sm-6 flex-column d-flex'>
                   {' '}
                   <label class='form-control-label px-3'>
+                    Pickup<span class='text-danger'> *</span>
+                  </label>{' '}
+                  <input
+                    type='text'
+                    autoComplete='off'
+                    {...register('pickup', {
+                      required: true,
+                    })}
+                  />{' '}
+                  {errors.pickup && <p>Pickup is required and must be valid</p>}{' '}
+                </div>
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
                     Price<span class='text-danger'> *</span>
                   </label>{' '}
                   <div>
@@ -196,6 +208,50 @@ const AddProduct = () => {
                 </div>
               </div>
               <div class='row justify-content-between text-left'>
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>Tags</label>{' '}
+                  <select autoComplete='off' {...register('tags')}>
+                    <option value=''></option>
+                    <option value='da-nang'>Đà Nẵng</option>
+                    <option value='hue'>Huế</option>
+                    <option value='other'>Nơi khác</option>
+                  </select>{' '}
+                </div>
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
+                    Type hotel<span class='text-danger'> *</span>
+                  </label>{' '}
+                  <input
+                    type='text'
+                    autoComplete='off'
+                    {...register('typeHotel', {
+                      required: true,
+                    })}
+                  />{' '}
+                  {errors.typeHotel && (
+                    <p>Type hotel is required and must be valid</p>
+                  )}{' '}
+                </div>
+              </div>
+              <div class='row justify-content-between text-left'>
+                <div class='form-group col-sm-6 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
+                    Depart<span class='text-danger'> *</span>
+                  </label>{' '}
+                  <input
+                    type='text'
+                    autoComplete='off'
+                    {...register('depart', {
+                      required: true,
+                    })}
+                  />{' '}
+                  {errors.depart && <p>Depart is required and must be valid</p>}{' '}
+                </div>
+              </div>
+              <div class='row justify-content-between text-left'>
                 <div class='form-group col-12 flex-column d-flex'>
                   {' '}
                   <label class='form-control-label px-3'>
@@ -207,10 +263,33 @@ const AddProduct = () => {
                     autoComplete='off'
                     {...register('description', {
                       required: true,
+                      maxLength: 150,
                     })}
                   />
-                  {errors.description && (
+                  {errors.description && errors.name.type === 'required' && (
                     <p>Description is required and must be valid</p>
+                  )}
+                  {errors.description && errors.name.type === 'maxLength' && (
+                    <p>Max length exceeded</p>
+                  )}{' '}
+                </div>
+              </div>
+              <div class='row justify-content-between text-left'>
+                <div class='form-group col-12 flex-column d-flex'>
+                  {' '}
+                  <label class='form-control-label px-3'>
+                    Content
+                    <span class='text-danger'> *</span>
+                  </label>{' '}
+                  <textarea
+                    type='text'
+                    autoComplete='off'
+                    {...register('content', {
+                      required: true,
+                    })}
+                  />
+                  {errors.content && errors.name.type === 'required' && (
+                    <p>Content is required and must be valid</p>
                   )}{' '}
                 </div>
               </div>

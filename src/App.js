@@ -12,12 +12,14 @@ import HomePage from './pages/homePage/HomePage';
 import RentCar from './pages/rentCar/RentCar';
 import ToursTravel from './pages/toursTravel/ToursTravel';
 import AppProvider from './context/AppProvider';
+import ScrollToTop from './components/scrollToTop/ScrollToTop';
 
 function App() {
   return (
     <HashRouter>
       <AppProvider>
         <Header />
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/tours-travel' element={<ToursTravel />} />

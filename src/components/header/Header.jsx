@@ -3,6 +3,7 @@ import {
   NavLink,
   useLocation,
   useMatch,
+  useNavigate,
   useResolvedPath,
 } from 'react-router-dom';
 import './style.css';
@@ -42,14 +43,16 @@ const Header = () => {
   ];
 
   function CustomLink({ id, to, children, ...props }) {
+    const navigate = useNavigate();
     const resolvedPath = useResolvedPath(to);
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+    let isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
     return (
-      <li class={`nav-item nav-link ${isActive ? 'active' : ''}`}>
-        <NavLink to={to} {...props}>
-          {children}
-        </NavLink>
+      <li
+        class={`nav-item nav-link ${isActive ? 'active' : ''}`}
+        onClick={() => navigate(to)}
+      >
+        <NavLink {...props}>{children}</NavLink>
       </li>
     );
   }

@@ -4,6 +4,7 @@ import { AppContext } from '../../context/AppProvider';
 import AboutUs from './components/aboutUs/AboutUs';
 import Services from './components/services/Services';
 import './style.css';
+import Destination from './components/destination/Destination';
 
 const HomePage = () => {
   const { toursData } = useContext(AppContext);
@@ -12,6 +13,7 @@ const HomePage = () => {
     <div>
       <AboutUs />
       <Services />
+      <Destination />
       <Products
         data={toursData}
         numberProduct={4}
