@@ -1,5 +1,6 @@
+import parse from 'html-react-parser';
 import React, { useContext, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../../context/AppProvider';
 import useGetUrlImage from '../../hooks/useGetUrlImage';
 import PageNotFound from '../../pages/404/PageNotFound';
@@ -7,25 +8,27 @@ import './style.css';
 
 const Product = ({ item }) => {
   const urlImage = useGetUrlImage(item);
-
+  const navigate = useNavigate();
   return (
     <>
       <div class='d-flex mb-3'>
-        <a href='#' class='me-3'>
-          <img
-            src={urlImage}
-            style={{
-              width: '96px',
-              height: '96px',
-            }}
-            alt=''
-            class='img-md img-thumbnail'
-          />
-        </a>
+        <img
+          src={urlImage}
+          style={{
+            width: '96px',
+            height: '96px',
+          }}
+          alt=''
+          class='img-md img-thumbnail'
+        />
         <div class='info'>
-          <a href='#' class='nav-link'>
+          <div
+            class='nav-link'
+            onClick={() => navigate(`/detail/${item.uuid}`)}
+            style={{ cursor: 'pointer' }}
+          >
             {item.title}
-          </a>
+          </div>
           <div class='text-dark ml-3'>
             {item.price}
             <i> vnđ</i>
@@ -125,7 +128,7 @@ const DetailTour = () => {
                     role='tabpanel'
                     aria-labelledby='ex1-tab-1'
                   >
-                    {productData.content}
+                    {parse(productData.content)}
                   </div>
                 </div>
               </div>

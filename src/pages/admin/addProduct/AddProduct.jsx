@@ -1,22 +1,27 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { uid } from 'uid';
+import TinyEditor from '../../../components/tinyEditor/TinyEditor';
 import { AppContext } from '../../../context/AppProvider';
 import { db, storage } from '../../../firebase/config';
 import { addDocument } from '../../../firebase/services';
 import './style.css';
 
 const AddProduct = () => {
-  const navigate = useNavigate();
   const uuid = uid();
+  const editorRef = useRef(null);
+  const navigate = useNavigate();
   const { productId } = useParams();
-  const isAddMode = !productId;
+
   const { allProductsData } = useContext(AppContext);
+
   const [imageUpload, setImageUpload] = useState(null);
   const [nameImage, setNameImage] = useState('');
+
+  const isAddMode = !productId;
 
   const {
     reset,
@@ -42,9 +47,14 @@ const AddProduct = () => {
   };
 
   const handleCreateProduct = (data) => {
+    let content = '';
+    if (editorRef.current) {
+      content = editorRef.current.getContent();
+    }
     addDocument('products', {
       uuid,
       nameImage,
+      content,
       ...data,
     });
     uploadFile();
@@ -52,9 +62,14 @@ const AddProduct = () => {
   };
 
   const handleUpdateProduct = (data) => {
+    let content = '';
+    if (editorRef.current) {
+      content = editorRef.current.getContent();
+    }
     const newData = {
       ...product,
       ...data,
+      content: content.length !== '' ? content : product.content,
       nameImage: nameImage.length > 0 ? nameImage : product.nameImage,
     };
     const docRef = doc(db, 'products', product.id);
@@ -281,16 +296,7 @@ const AddProduct = () => {
                     Content
                     <span class='text-danger'> *</span>
                   </label>{' '}
-                  <textarea
-                    type='text'
-                    autoComplete='off'
-                    {...register('content', {
-                      required: true,
-                    })}
-                  />
-                  {errors.content && errors.name.type === 'required' && (
-                    <p>Content is required and must be valid</p>
-                  )}{' '}
+                  <TinyEditor product={product} editorRef={editorRef} />{' '}
                 </div>
               </div>
               <div class='row justify-content-end'>

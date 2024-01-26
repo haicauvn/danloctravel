@@ -13,7 +13,6 @@ const ToursTravel = () => {
     setToursHue(toursData.filter((item) => item.tags === 'hue'));
     setToursOther(toursData.filter((item) => item.tags === 'other'));
   }, [toursData]);
-  console.log('toursDaNang', toursDaNang);
 
   return (
     <>
