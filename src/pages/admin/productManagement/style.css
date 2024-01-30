@@ -7,7 +7,6 @@
 
 .add-product-btn p {
   float: right;
-  position: absolute;
   top: 20px;
   right: 35px;
   padding: 6px 20px;
@@ -23,7 +22,6 @@
 
 .product-status-wrap h4 {
   font-size: 20px;
-  margin-bottom: 20px;
 }
 .product-status-wrap table {
   width: 100%;

@@ -7,20 +7,6 @@ const AboutUs = () => {
       <div class='container-xxl py-5'>
         <div class='container'>
           <div class='row g-5'>
-            <div
-              class='col-lg-6 wow fadeInUp'
-              data-wow-delay='0.1s'
-              style={{ minHeight: '400px' }}
-            >
-              <div class='position-relative h-100'>
-                <img
-                  class='img-fluid position-absolute w-100 h-100'
-                  src={require('../../../../img/about.jpg')}
-                  alt=''
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-            </div>
             <div class='col-lg-6 wow fadeInUp' data-wow-delay='0.3s'>
               <h6 class='section-title bg-white text-start text-primary pe-3'>
                 About Us
@@ -33,6 +19,12 @@ const AboutUs = () => {
                 Nẵng và Huế. Với kinh nghiệm hơn 10 năm trong lĩnh vực du lịch,
                 chúng tôi cam kết mang đến cho du khách những trải nghiệm du
                 lịch tuyệt vời với giá cả hợp lý.
+              </p>
+              <p class='mb-4'>
+                Dần Lộc Travel sở hữu đội ngũ nhân viên chuyên nghiệp, tận tâm,
+                có kinh nghiệm dày dặn trong lĩnh vực du lịch. Chúng tôi luôn
+                sẵn sàng tư vấn và hỗ trợ du khách lựa chọn được tour du lịch
+                phù hợp với nhu cầu và sở thích của mình.
               </p>
               <p class='mb-4'>
                 Chúng tôi cung cấp đa dạng các loại tour du lịch từ tour trong
@@ -78,9 +70,46 @@ const AboutUs = () => {
                   </p>
                 </div>
               </div>
-              <a class='btn btn-primary py-3 px-5 mt-2' href=''>
+              {/* <a class='btn btn-primary py-3 px-5 mt-2' href=''>
                 Read More
-              </a>
+              </a> */}
+            </div>
+            <div class='col-lg-6'>
+              <div class='row g-3'>
+                <div class='col-6 text-end'>
+                  <img
+                    class='img-fluid rounded w-75 wow zoomIn'
+                    data-wow-delay='0.1s'
+                    src={require('../../../../img/about-1.jpg')}
+                    style={{ marginTop: '25%' }}
+                    alt='image1'
+                  />
+                </div>
+                <div class='col-6 text-start'>
+                  <img
+                    class='img-fluid rounded w-100 wow zoomIn'
+                    data-wow-delay='0.3s'
+                    src={require('../../../../img/about-2.jpg')}
+                    alt='image2'
+                  />
+                </div>
+                <div class='col-6 text-end'>
+                  <img
+                    class='img-fluid rounded w-50 wow zoomIn'
+                    data-wow-delay='0.5s'
+                    src={require('../../../../img/about-3.jpg')}
+                    alt='image3'
+                  />
+                </div>
+                <div class='col-6 text-start'>
+                  <img
+                    class='img-fluid rounded w-75 wow zoomIn'
+                    data-wow-delay='0.7s'
+                    src={require('../../../../img/about-4.jpg')}
+                    alt='image4'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

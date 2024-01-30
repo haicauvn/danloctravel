@@ -33,7 +33,6 @@ const Product = ({ item }) => {
           />
         </td>
         <td>{item.title}</td>
-        <td>{item.time}</td>
         <td>
           {item.price} <i>vnđ</i>
         </td>
@@ -61,7 +60,7 @@ const Product = ({ item }) => {
 };
 
 const ProductManagement = () => {
-  const { allProductsData } = useContext(AppContext);
+  const { toursData, carData, hotelData } = useContext(AppContext);
   const navigate = useNavigate();
 
   return (
@@ -70,26 +69,59 @@ const ProductManagement = () => {
         <div class='container-fluid'>
           <div class='row'>
             <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+              <div
+                class='add-product-btn'
+                onClick={() => navigate('/admin/add-product')}
+              >
+                <p>Thêm sản phẩm</p>
+              </div>
               <div class='product-status-wrap'>
                 <h4>Danh sách sản phẩm</h4>
-                <div
-                  class='add-product-btn'
-                  onClick={() => navigate('/admin/add-product')}
-                >
-                  <p>Thêm sản phẩm</p>
-                </div>
                 <table>
                   <thead>
                     <tr>
                       <th>Image</th>
                       <th>Product Title</th>
-                      <th>Time</th>
                       <th>Price</th>
                       <th>Setting</th>
                     </tr>
                   </thead>
-                  {allProductsData &&
-                    allProductsData.map((item) => (
+                  {toursData &&
+                    toursData.map((item) => (
+                      <Product key={item.uuid} item={item} />
+                    ))}
+                </table>
+              </div>
+              <div class='product-status-wrap mt-5'>
+                <h4>Danh sách xe cho thuê</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Product Title</th>
+                      <th>Price</th>
+                      <th>Setting</th>
+                    </tr>
+                  </thead>
+                  {carData &&
+                    carData.map((item) => (
+                      <Product key={item.uuid} item={item} />
+                    ))}
+                </table>
+              </div>
+              <div class='product-status-wrap mt-5'>
+                <h4>Danh sách khách sạn</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Product Title</th>
+                      <th>Price</th>
+                      <th>Setting</th>
+                    </tr>
+                  </thead>
+                  {hotelData &&
+                    hotelData.map((item) => (
                       <Product key={item.uuid} item={item} />
                     ))}
                 </table>

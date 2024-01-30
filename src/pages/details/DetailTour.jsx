@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../../context/AppProvider';
 import useGetUrlImage from '../../hooks/useGetUrlImage';
@@ -29,7 +29,7 @@ const Product = ({ item }) => {
           >
             {item.title}
           </div>
-          <div class='text-dark ml-3'>
+          <div class='text-dark mx-3'>
             {item.price}
             <i> vnđ</i>
           </div>
@@ -41,7 +41,9 @@ const Product = ({ item }) => {
 
 const DetailTour = () => {
   const { uuid } = useParams();
+  const navigate = useNavigate();
   const { allProductsData } = useContext(AppContext);
+  const [similarProduct, setSimilarProduct] = useState([]);
 
   const productData = useMemo(
     () => allProductsData.find((item) => item.uuid === uuid) || {},
@@ -49,6 +51,18 @@ const DetailTour = () => {
   );
 
   const urlImage = useGetUrlImage(productData);
+
+  // Get similar products
+  useEffect(() => {
+    setSimilarProduct(
+      allProductsData
+        .filter(
+          (item) =>
+            item.typeProduct === productData.typeProduct && item.uuid !== uuid
+        )
+        .slice(0, 4)
+    );
+  }, [allProductsData, productData.typeProduct, uuid]);
 
   if (!productData.title) return <PageNotFound />;
 
@@ -84,32 +98,54 @@ const DetailTour = () => {
                     <small class='fa fa-star text-primary'></small>
                   </div>
                 </div>
-
+                {productData.typeProduct === 'hotel' && (
+                  <div class='d-flex mb-3'>
+                    <small class='border-end me-3 pe-3'>
+                      <i class='fa fa-bed text-primary me-2'></i>3 Bed
+                    </small>
+                    <small class='border-end me-3 pe-3'>
+                      <i class='fa fa-bath text-primary me-2'></i>2 Bath
+                    </small>
+                    <small>
+                      <i class='fa fa-wifi text-primary me-2'></i>Wifi
+                    </small>
+                  </div>
+                )}
                 <div class='mb-3'>
                   <span class='h5'>
                     {productData.price} <i>vnđ</i>
                   </span>
                 </div>
-                <div class='mb-2'>
+                <div class='mb-3'>
                   <b>{productData.description}</b>
                 </div>
-                <div class='row'>
-                  <dt class='col-3'>Khách sạn:</dt>
-                  <dd class='col-9'>{productData.typeHotel}</dd>
+                {productData.typeProduct === 'tour-travel' && (
+                  <div class='row'>
+                    <dt class='col-3'>
+                      <i class='fas fa-hotel text-primary me-2'></i>Khách sạn:
+                    </dt>
+                    <dd class='col-9'>{productData.typeHotel}</dd>
 
-                  <dt class='col-3'>Khởi hành:</dt>
-                  <dd class='col-9'>{productData.depart}</dd>
+                    <dt class='col-3'>
+                      <i class='fas fa-calendar-alt text-primary me-2'></i> Khởi
+                      hành:
+                    </dt>
+                    <dd class='col-9'>{productData.depart}</dd>
 
-                  <dt class='col-3'>Phương tiện:</dt>
-                  <dd class='col-9'>{productData.pickup}</dd>
-                </div>
-
+                    <dt class='col-3'>
+                      <i class='fas fa-road text-primary me-2'></i>Phương tiện:
+                    </dt>
+                    <dd class='col-9'>{productData.pickup}</dd>
+                  </div>
+                )}
                 <hr />
-
-                <a href='#' class='btn btn-primary shadow-0'>
+                <div
+                  onClick={() => navigate('/contact')}
+                  class='btn btn-primary shadow-0'
+                >
                   {' '}
-                  Book now{' '}
-                </a>
+                  Liên hệ ngay{' '}
+                </div>
               </div>
             </main>
           </div>
@@ -133,13 +169,13 @@ const DetailTour = () => {
                 </div>
               </div>
             </div>
-            {allProductsData.length && (
+            {similarProduct.length && (
               <div class='col-lg-4'>
                 <div class='px-0  rounded-2 shadow-0'>
                   <div class='card'>
                     <div class='card-body'>
                       <h5 class='card-title'>Similar items</h5>
-                      {allProductsData.slice(0, 4).map((item) => (
+                      {similarProduct.map((item) => (
                         <Product item={item} />
                       ))}
                     </div>

@@ -10,7 +10,8 @@
 .product-item:hover img {
   transform: scale(1.1);
 }
-.product-item .product-description {
+.product-item .product-description,
+.room-item .product-description {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

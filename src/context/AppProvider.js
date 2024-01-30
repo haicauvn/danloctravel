@@ -20,18 +20,28 @@ export default function AppProvider({ children }) {
     }),
     []
   );
+  const conditionProduct3 = useMemo(
+    () => ({
+      fieldName: 'typeProduct',
+      operator: '==',
+      compareValue: 'hotel',
+    }),
+    []
+  );
 
   const carData = useFirestore('products', conditionProduct1);
   const toursData = useFirestore('products', conditionProduct2);
+  const hotelData = useFirestore('products', conditionProduct3);
   const allProductsData = useFirestore('products');
 
   const productContextValue = useMemo(
     () => ({
       carData,
       toursData,
+      hotelData,
       allProductsData,
     }),
-    [carData, toursData, allProductsData]
+    [carData, toursData, hotelData, allProductsData]
   );
 
   return (

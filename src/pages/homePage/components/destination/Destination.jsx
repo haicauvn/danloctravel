@@ -11,7 +11,7 @@ const Destination = () => {
             <h6 class='section-title bg-white text-center text-primary px-3'>
               Destination
             </h6>
-            <h1 class='mb-5'>Điểm đến phổ phiến</h1>
+            <h1 class='mb-5'>Điểm đến phổ biến</h1>
           </div>
           <div class='row g-3'>
             <div class='col-lg-7 col-md-6'>
