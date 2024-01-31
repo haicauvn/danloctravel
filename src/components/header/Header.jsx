@@ -156,7 +156,9 @@ const Header = () => {
             <div class='row justify-content-center py-5'>
               <div class='col-lg-10 pt-lg-5 mt-lg-5 text-center'>
                 <h1 class='display-3 text-white mb-3 animated slideInDown'>
-                  {item ? item.text : ''}
+                  {/* {item ? item.text : ''}
+                   */}
+                   Tour du lịch - Thuê xe - Khách sạn
                 </h1>
                 <p class='fs-4 text-white mb-4 animated slideInDown'>
                   Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
