@@ -139,22 +139,23 @@ const Header = () => {
           </div>
         </nav>
 
-        <div class='container-fluid bg-primary py-5 mb-5 hero-header'>
-          <div class='container py-5'>
-            <div class='row justify-content-center py-5'>
-              <div class='col-lg-10 pt-lg-5 mt-lg-5 text-center'>
-                <h1 class='display-3 text-white mb-3 animated slideInDown'>
-                  {/* {item ? item.text : ''}
-                   */}
-                   Tour du lịch - Thuê xe - Khách sạn
-                </h1>
-                <p class='fs-4 text-white mb-4 animated slideInDown'>
-                  Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
-                </p>
+        {location.pathname === '/' && (
+          <div class='container-fluid bg-primary py-5 mb-5 hero-header'>
+            <div class='container py-5'>
+              <div class='row justify-content-center py-5'>
+                <div class='col-lg-10 pt-lg-5 mt-lg-5 text-center'>
+                  <h1 class='display-3 text-white mb-3 animated slideInDown'>
+                    {item ? item.text : ''}
+                  </h1>
+                  <p class='fs-4 text-white mb-4 animated slideInDown'>
+                    Chuyên gia du lịch, đồng hành cùng bạn trên mọi hành trình
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
+        {location.pathname !== '/' && <div class='py-5 mb-5'></div>}
       </div>
       {/* Navbar & Hero End */}
     </div>
