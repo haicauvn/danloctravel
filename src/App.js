@@ -31,8 +31,8 @@ function App() {
             path='/admin/update-product/:productId'
             element={<AddProduct />}
           />
-          <Route path='/admin/add-product' element={<AddProduct />} />
-          <Route path='/admin' element={<ProductManagement />} />
+          {/* <Route path='/admin/add-product' element={<AddProduct />} />
+          <Route path='/admin' element={<ProductManagement />} /> */}
           <Route path='*' element={<PageNotFound />} />
         </Routes>
         <Footer />
