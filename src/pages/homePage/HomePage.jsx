@@ -11,8 +11,8 @@ const HomePage = () => {
 
   return (
     <div>
-      <AboutUs />
-      <Services />
+      {/* <AboutUs /> */}
+      {/* <Services /> */}
       <Destination />
       <Products
         data={toursData}

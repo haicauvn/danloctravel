@@ -18,7 +18,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* number of lines to show */
   line-height: 1.5em; /* fallback */
-  max-height: 3em; /* fallback */
+  max-height: 3em;
+  height: 3em; /* fallback */
   color: #2c3e50;
 }
 

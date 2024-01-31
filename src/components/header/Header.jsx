@@ -155,7 +155,7 @@ const Header = () => {
             </div>
           </div>
         )}
-        {location.pathname !== '/' && <div class='py-5 mb-5'></div>}
+        {location.pathname !== '/' && <div class='py-5 mb-3'></div>}
       </div>
       {/* Navbar & Hero End */}
     </div>

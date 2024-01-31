@@ -8,17 +8,17 @@ const Contact = () => {
         <div class='container'>
           <div class='text-center wow fadeInUp' data-wow-delay='0.1s'>
             <h6 class='section-title bg-white text-center text-primary px-3'>
-              Contact Us
+              Liên hệ chúng tôi
             </h6>
-            <h1 class='mb-5'>Contact For Any Query</h1>
+            <h1 class='mb-5'>Liên hệ chúng tôi với bất cứ câu hỏi nào</h1>
           </div>
           <div class='row g-4'>
             <div class='col-lg-4 col-md-6 wow fadeInUp' data-wow-delay='0.1s'>
-              <h5>Get In Touch</h5>
+              {/* <h5>Get In Touch</h5>
               <p class='mb-4'>
                 Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
                 Aliqu diam amet diam et eos
-              </p>
+              </p> */}
               <div class='d-flex align-items-center mb-4'>
                 <div
                   class='d-flex align-items-center justify-content-center flex-shrink-0 bg-primary'
